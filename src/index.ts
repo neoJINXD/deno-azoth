@@ -35,8 +35,6 @@ try {
           socket.send(JSON.stringify(p));
         }, heartbeat_interval);
 
-        //TODO THIS PART IS ERRORING OUT, 
-        // SyntaxError: Unexpected token o in JSON at position 1
         const identifyResponse = {
           op: 2,
           d: {
