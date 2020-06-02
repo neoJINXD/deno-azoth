@@ -1,9 +1,16 @@
 import { connectWebSocket } from 'https://deno.land/std/ws/mod.ts';
-import "https://deno.land/x/dotenv/load.ts";
+import { config } from "https://deno.land/x/denoenv/mod.ts";
 
 
 const GATEWAY = 'wss://gateway.discord.gg/?v=6&encoding=json';
-const TOKEN = Deno.env.get('TOKEN');
+// const TOKEN = Deno.env.get('TOKEN');
+const env = config();
+
+if (env.error){
+  throw env.error;
+}
+
+const TOKEN = env.TOKEN;
 
 try {
   const socket = await connectWebSocket(GATEWAY);
