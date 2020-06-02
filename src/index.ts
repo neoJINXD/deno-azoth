@@ -1,7 +1,9 @@
 import { connectWebSocket } from 'https://deno.land/std/ws/mod.ts';
+import "https://deno.land/x/dotenv/load.ts";
+
 
 const GATEWAY = 'wss://gateway.discord.gg/?v=6&encoding=json';
-const token = 'xsN7rKHIvDORHgR2f_sDUZ2WCkgv5o2P';
+const TOKEN = Deno.env.get('TOKEN');
 
 try {
   const socket = await connectWebSocket(GATEWAY);
@@ -18,7 +20,7 @@ try {
         const { heartbeat_interval } = d;   
         const p = { 
           op: 1, 
-          d: null
+          d: null,
         };
 
         setInterval(() => {
@@ -26,9 +28,24 @@ try {
           socket.send(JSON.stringify(p));
         }, heartbeat_interval);
 
+        //TODO THIS PART IS ERRORING OUT, 
+        // SyntaxError: Unexpected token o in JSON at position 1
+        const identifyResponse = {
+          op: 2,
+          d: {
+            token: TOKEN,
+            properties: {
+              $os: "linux",
+              $browser: "azoth",
+              $device: "azoth"
+            }
+          }
+        };
+        socket.send(JSON.stringify(identifyResponse));
+
         break;
     }
-    console.log(m);
+    console.log(payload);
   }
 
 } catch (err) {
