@@ -1,9 +1,10 @@
 import { connectWebSocket } from 'https://deno.land/std/ws/mod.ts';
 import { config } from "https://deno.land/x/denoenv/mod.ts";
-
+import { writeFile } from './writer.ts'
+import axiod from "https://deno.land/x/axiod/mod.ts";
 
 const GATEWAY = 'wss://gateway.discord.gg/?v=6&encoding=json';
-// const TOKEN = Deno.env.get('TOKEN');
+
 const env = config();
 
 if (env.error){
@@ -46,11 +47,16 @@ try {
             }
           }
         };
-        socket.send(JSON.stringify(identifyResponse));
-
+        await socket.send(JSON.stringify(identifyResponse));
+        console.log('We been identified');
         break;
+
+        case 0:
+          if (t === 'MESSAGE_CREATE'){
+            console.log(`You just said: ${d.content}`);
+            const CHANNEL_ID = d.channel_id;
+          }
     }
-    console.log(payload);
   }
 
 } catch (err) {
