@@ -1,16 +1,6 @@
 import { connectWebSocket } from 'https://deno.land/std/ws/mod.ts';
-import { config } from "https://deno.land/x/denoenv/mod.ts";
 import { writeFile } from './writer.ts'
-
-const GATEWAY = 'wss://gateway.discord.gg/?v=6&encoding=json';
-
-const env = config();
-
-if (env.error){
-  throw env.error;
-}
-
-const TOKEN = env.TOKEN;
+import { TOKEN, GATEWAY, API } from './config.ts';
 
 let isReady = false;
 
@@ -62,7 +52,7 @@ try {
               
               //right now just sending back whatever was last said
    
-              const response = await fetch(`https://discord.com/api/v6/channels/${CHANNEL_ID}/messages`, {
+              const response = await fetch(`${API}/channels/${CHANNEL_ID}/messages`, {
                 method: 'POST',
                 headers: {
                   'Content-type': 'application/json',
