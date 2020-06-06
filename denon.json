@@ -3,7 +3,7 @@
   "scripts": {
     "start": {
       "cmd": "src/index.ts",
-      "desc": "",
+      "desc": "vvat",
       "allow": [
         "env",
         "read",
