@@ -1,3 +1,5 @@
+import { writeFile } from './writer.ts';
+import { writeJson, writeJsonSync } from "https://deno.land/std/fs/mod.ts";
 
 const example: string = 'https://github.com/neoJINXD/deno-azoth';
 
@@ -17,9 +19,14 @@ try {
   const json = await result.json();
   
   console.log(json);
+  // writeFile('./github-response.json', json);
+  await writeJson('./github-response.json', json);
 
 
-
+  //create a webhook to the repo provided
+  
+  
+  //listen to said webhook
 
 
 

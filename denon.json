@@ -3,13 +3,20 @@
   "scripts": {
     "start": {
       "cmd": "src/index.ts",
-      "desc": "vvat",
+      "desc": "Runs the bot",
       "allow": [
         "env",
         "read",
         "net"
       ]
-
+    },
+    "github": {
+      "cmd": "src/github.ts",
+      "desc": "Runs the test connection to the github api",
+      "allow": [
+        "net",
+        "write"
+      ]
     }
   }
 }
