@@ -1,6 +1,7 @@
 import { connectWebSocket } from 'https://deno.land/std/ws/mod.ts';
 import { writeFile } from './writer.ts'
 import { TOKEN, GATEWAY, API } from './config.ts';
+import { MessagePayload } from './payload.ts';
 
 //import { existsSync, readJsonSync, writeJsonSync } from "https://deno.land/std/fs/mod.ts"
 
@@ -46,6 +47,8 @@ try {
 
         case 0:
           if (t === 'MESSAGE_CREATE' && isReady){
+            const msgPayload: MessagePayload = payload;
+            
             //only send message if the last message was not from the bot itself
             //otherwise this the bots own response with trigger another post request to occure
             if (d.author.username !== 'neo bot'){ //TODO should not have bot name hard coded
