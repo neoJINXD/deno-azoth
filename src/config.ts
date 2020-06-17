@@ -8,15 +8,11 @@ if (env.error){
 
 // Discord API and Gateway connection
 export const TOKEN = env.TOKEN;
-export const BOT_URI = env.IP;
-
 export const GATEWAY = 'wss://gateway.discord.gg/?v=6&encoding=json';
 export const API = 'https://discord.com/api/v6';
 
-
 // Gitlab API here
 
-
 // GitHub API here
-
-
+export const BOT_URI = `http://${env.IP}:25565`; // TODO put port in .env
+export const GITHUB_TOKEN = env.GITHUB_TOKEN;
