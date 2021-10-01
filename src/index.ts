@@ -1,4 +1,5 @@
-import { connectWebSocket } from 'https://deno.land/std/ws/mod.ts';
+//import { connectWebSocket } from 'https://deno.land/std/ws/mod.ts';
+import { WebSocket } from 'https://deno.land/std/ws/mod.ts';
 import { writeFile } from './writer.ts'
 import { TOKEN, GATEWAY, API } from './config.ts';
 import { MessagePayload } from './payload.ts';
@@ -8,7 +9,8 @@ import { MessagePayload } from './payload.ts';
 let isReady = false;
 
 try {
-  const socket = await connectWebSocket(GATEWAY);
+  //const socket = await connectWebSocket(GATEWAY);
+  const socker = new WebSocket(GATEWAY);
   console.log('Connected to the discord gateway!');
 
   for await (const m of socket){
